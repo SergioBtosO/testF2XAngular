@@ -1,1 +1,13 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container autosize="true">
+  <mat-sidenav opened="true" mode="side" *ngIf="!config.layout?.menu?.hidden">
+    <div class="logo" fxLayout fxLayoutGap="20px" fxLayoutAlign="start center">
+      <mat-icon svgIcon="logo"></mat-icon>
+      <h3 *ngIf="expanded">Test F2X Sergio </h3>
+    </div>
+    <f2x-menu (onExpand)="showExpand($event)"></f2x-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <f2x-header *ngIf="!config.layout?.header?.hidden"></f2x-header>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
