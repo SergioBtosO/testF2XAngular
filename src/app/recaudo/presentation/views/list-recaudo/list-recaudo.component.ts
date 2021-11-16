@@ -58,7 +58,7 @@ export class ListRecaudoComponent extends PaginatorData implements OnInit {
     private readonly recaudoUseCase: RecaudoUseCase
   ) {
     super();
-    this.list(1);
+    this.list(0);
   }
 
   list(page: number) {
@@ -66,7 +66,7 @@ export class ListRecaudoComponent extends PaginatorData implements OnInit {
       .listByPage(page, environment.pageSize)
       .subscribe((response: ResponseAllRecaudo) => {
         this.dataByPage = response.data;
-        this.totalRecords = 20;//response.data.length;
+        this.totalRecords = response.total;
       });
   }
 
@@ -80,7 +80,7 @@ export class ListRecaudoComponent extends PaginatorData implements OnInit {
       }
 
       this.recaudoUseCase.delete(record).subscribe(() => {
-        this.list(1);
+        this.list(0);
       });
     });
   }
@@ -104,12 +104,12 @@ export class ListRecaudoComponent extends PaginatorData implements OnInit {
 
       if (response.id) {
         this.recaudoUseCase.update(response).subscribe((response: Recaudo) => {
-          this.list(1);
+          this.list(0);
         });
       } else {
         delete response.id;
         this.recaudoUseCase.insert(response).subscribe((response: Recaudo) => {
-          this.list(1);
+          this.list(0);
         });
       }
     });

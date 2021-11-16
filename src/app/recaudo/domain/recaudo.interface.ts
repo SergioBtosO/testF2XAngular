@@ -10,7 +10,8 @@ export interface Recaudo {
 }
 
 export interface ResponseAllRecaudo {
-  
+
+    total:number;
     pageNumber: number;
     pageSize: number;
     succeeded: boolean;
